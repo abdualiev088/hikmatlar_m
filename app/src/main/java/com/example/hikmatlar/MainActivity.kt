@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        this is an example for revert
+
         navView = binding.navView
         navView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
