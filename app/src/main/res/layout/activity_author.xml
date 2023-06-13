@@ -28,11 +28,12 @@
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
             <LinearLayout
                 android:id="@+id/camel"
-                android:background="@color/transparentImg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/transparentImg"
                 android:orientation="horizontal" />
         </androidx.cardview.widget.CardView>
 

@@ -1,5 +1,6 @@
 package com.example.hikmatlar.QuoteRv
 
+import android.content.Intent
 import android.location.GnssAntennaInfo.Listener
 import android.renderscript.ScriptGroup.Binding
 import android.util.Log.d
@@ -13,10 +14,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hikmatlar.AuthorActivity
+import com.example.hikmatlar.MainActivity
 import com.example.hikmatlar.R
 import com.example.hikmatlar.databinding.QuoteItemBinding
 
-class QuoteAdapter(private var quotes: List<QuoteItem> )
+class QuoteAdapter(private var quotes: List<QuoteItem>)
     : RecyclerView.Adapter<QuoteAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteAdapter.ViewHolder {

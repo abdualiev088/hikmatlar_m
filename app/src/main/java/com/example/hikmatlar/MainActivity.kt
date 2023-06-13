@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        this is an example for revert
+//        this is an example for revert
 
         navView = binding.navView
         navView.setOnItemSelectedListener { menuItem ->
@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.saved -> {
                     supportFragmentManager.apply {
                         beginTransaction().replace(R.id.contentView, savedQuotes)
