@@ -11,9 +11,19 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hikmatlar.Backend.API_ROUTE
+import com.example.hikmatlar.Backend.Api.ApiService.ApiService
+import com.example.hikmatlar.Backend.Quotes
 import com.example.hikmatlar.QuoteRv.QuoteAdapter
 import com.example.hikmatlar.QuoteRv.QuoteItem
 import com.example.hikmatlar.databinding.FragmentQuoteBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 
 class QuoteFragment : Fragment() {
@@ -53,6 +63,37 @@ class QuoteFragment : Fragment() {
         ),)
         rv.layoutManager = layoutManager
         rv.adapter = adapter
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(API_ROUTE.API_BASE_URL)
+            .build()
+            .create(ApiService::class.java)
+
+
+        val apiService = retrofit.getQuotes()
+        apiService.enqueue(object: Callback<List<QuoteItem>> {
+
+        })
+
+//        val scope = CoroutineScope(Dispatchers.IO)
+//        suspend fun fetchQuotes(){
+//            try{
+//                val quotes = apiService.getQuotes()
+//                d("mylog","IT IS WORKING")
+//                d("mylog","$quotes")
+//
+//                for (quote in quotes){
+//                    d("mylog","IT IS WORKING")
+//                    d("mylog","${quote.author}, ${quote.text}, ${quote.translation}")
+//                }
+//            }
+//            catch (e:Exception){
+//                println("Error: ${e.message}")
+//            }
+//        }
+//
+//        scope.launch { fetchQuotes() }
 
 
     }
