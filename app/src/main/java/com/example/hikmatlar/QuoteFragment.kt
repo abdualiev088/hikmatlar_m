@@ -11,16 +11,19 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hikmatlar.Backend.API_ROUTE
+import com.example.hikmatlar.Backend.Api.API_ROUTE
 import com.example.hikmatlar.Backend.Api.ApiService.ApiService
 import com.example.hikmatlar.Backend.Quotes
+import com.example.hikmatlar.Backend.QuotesItem
 import com.example.hikmatlar.QuoteRv.QuoteAdapter
 import com.example.hikmatlar.QuoteRv.QuoteItem
 import com.example.hikmatlar.databinding.FragmentQuoteBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.Exception
@@ -63,7 +66,11 @@ class QuoteFragment : Fragment() {
         ),)
         rv.layoutManager = layoutManager
         rv.adapter = adapter
+        getData()
 
+    }
+
+    fun getData(){
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(API_ROUTE.API_BASE_URL)
@@ -72,30 +79,23 @@ class QuoteFragment : Fragment() {
 
 
         val apiService = retrofit.getQuotes()
-        apiService.enqueue(object: Callback<List<QuoteItem>> {
+        apiService.enqueue(object : Callback<List<QuotesItem>>{
+            override fun onResponse(
+                call: Call<List<QuotesItem>>, response: Response<List<QuotesItem>>) {
+                if (response.isSuccessful) {
+                    val quoteItems = response.body()
+                    d("mytag", "IT IS WORKING")
+                    d("mytag", "$quoteItems")
+                    // Process the quoteItems here
+                } else {
+                    // Handle unsuccessful response
+                }
+            }
 
+            override fun onFailure(call: Call<List<QuotesItem>?>, t: Throwable) {
+                // Handle network or other errors
+            }
         })
-
-//        val scope = CoroutineScope(Dispatchers.IO)
-//        suspend fun fetchQuotes(){
-//            try{
-//                val quotes = apiService.getQuotes()
-//                d("mylog","IT IS WORKING")
-//                d("mylog","$quotes")
-//
-//                for (quote in quotes){
-//                    d("mylog","IT IS WORKING")
-//                    d("mylog","${quote.author}, ${quote.text}, ${quote.translation}")
-//                }
-//            }
-//            catch (e:Exception){
-//                println("Error: ${e.message}")
-//            }
-//        }
-//
-//        scope.launch { fetchQuotes() }
-
-
     }
 
 }
