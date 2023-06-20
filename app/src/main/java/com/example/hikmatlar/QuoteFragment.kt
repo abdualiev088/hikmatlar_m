@@ -11,7 +11,7 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hikmatlar.Backend.Api.API_ROUTE
+import com.example.hikmatlar.Backend.API_ROUTE
 import com.example.hikmatlar.Backend.Api.ApiService.ApiService
 import com.example.hikmatlar.Backend.Quotes
 import com.example.hikmatlar.Backend.QuotesItem
@@ -88,12 +88,14 @@ class QuoteFragment : Fragment() {
                     d("mytag", "$quoteItems")
                     // Process the quoteItems here
                 } else {
+                    d("mytag", "Error: ${response.body()}")
                     // Handle unsuccessful response
                 }
             }
 
             override fun onFailure(call: Call<List<QuotesItem>?>, t: Throwable) {
                 // Handle network or other errors
+                d("mytag", "${t.message}")
             }
         })
     }
