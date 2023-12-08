@@ -5,6 +5,7 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -72,52 +73,13 @@ class QuoteFragment : Fragment() {
             }
         })
 
-
-//        adapter = QuoteAdapter(
-//            listOf(
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                ),
-//                QuoteItem(
-//                    "لا يهم كم أنت بطيئ طالما أنك لن تتوقف",
-//                    "It does not matter how slowly you go as long as you do not stop.",
-//                    "Imam Xisham"
-//                )
-//            ),
-//        )
-
+        binding.editTextSearch.doOnTextChanged { text, start, before, count ->
+            adapter.filter(text.toString())
+            when(adapter.itemCount){
+                0 -> binding.ifEmpty.visibility = View.VISIBLE
+                else ->  binding.ifEmpty.visibility = View.GONE
+            }
+        }
     }
 
 }
