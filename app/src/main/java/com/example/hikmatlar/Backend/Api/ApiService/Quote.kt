@@ -1,8 +1,6 @@
-package com.example.hikmatlar.Backend
+package com.example.hikmatlar.Backend.Api.ApiService
 
-import com.example.hikmatlar.Backend.Api.Hashtag
-
-data class QuotesItem(
+data class Quote(
     val author: String,
     val created_at: String,
     val hashtags: List<Hashtag>,

@@ -37,6 +37,9 @@ android {
 
 dependencies {
 
+//    ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
+
 //  Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //  GSON Converter
