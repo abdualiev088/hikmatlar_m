@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
     companion object {
-        private const val BASE_URL = "http://10.0.2.2:8000/"
+        private const val BASE_URL = "https://hikmatlar.pythonanywhere.com/"
 
         fun create(): ApiService {
             val retrofit = Retrofit.Builder()
