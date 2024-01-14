@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
@@ -19,8 +18,9 @@
         tools:targetApi="31" >
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_author"
             android:theme="@style/Theme.Hikmatlar.NoActionBar" />
         <!-- <activity -->
@@ -29,7 +29,7 @@
         <!-- android:label="@string/title_activity_saved_quotes" -->
         <!-- android:theme="@style/Theme.Hikmatlar.NoActionBar" /> -->
         <activity
-            android:name=".AuthorActivity"
+            android:name=".ui.AuthorActivity"
             android:exported="false"
             android:label="@string/title_activity_author"
             android:theme="@style/Theme.Hikmatlar.NoActionBar" />
@@ -39,12 +39,12 @@
             android:label="@string/title_activity_quote"
             android:theme="@style/Theme.Hikmatlar.NoActionBar" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".ui.IntroActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.Hikmatlar.NoActionBar" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".ui.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

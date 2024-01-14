@@ -1,4 +1,4 @@
-package com.example.hikmatlar.QuoteRv
+package com.example.hikmatlar.ui.QuoteRv
 
 import android.text.TextUtils
 import android.util.Log.d
@@ -20,13 +20,13 @@ class QuoteAdapter(private var quotes: List<Quote>)
     private val originalList = quotes
     private val filteredList = ArrayList(originalList)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuoteAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.quote_item, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: QuoteAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val quote = filteredList.get(position)
         holder.title.text = quote.text
         holder.quote.text = quote.translation
@@ -78,6 +78,8 @@ class QuoteAdapter(private var quotes: List<Quote>)
                 if (quote.translation.lowercase()
                         .contains(query.lowercase())
                     || quote.author.lowercase()
+                        .contains(query.lowercase())
+                    || quote.text.lowercase()
                         .contains(query.lowercase())
                 ) {
                     filteredList.add(quote)

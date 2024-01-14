@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/navView"
         android:id="@+id/contentView"
-        android:name="com.example.hikmatlar.QuoteFragment"
+        android:name="com.example.hikmatlar.ui.QuoteFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp">
     </androidx.fragment.app.FragmentContainerView>

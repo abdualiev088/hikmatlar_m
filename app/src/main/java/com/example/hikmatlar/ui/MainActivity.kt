@@ -1,10 +1,9 @@
-package com.example.hikmatlar
+package com.example.hikmatlar.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.hikmatlar.R
 import com.example.hikmatlar.databinding.ActivityMainBinding
-import com.example.hikmatlar.databinding.ActivityQuoteBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

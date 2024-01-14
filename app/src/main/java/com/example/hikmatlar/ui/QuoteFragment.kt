@@ -1,9 +1,8 @@
-package com.example.hikmatlar
+package com.example.hikmatlar.ui
 
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log.d
@@ -11,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat.recreate
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hikmatlar.Backend.Api.ApiService.ApiClient
 import com.example.hikmatlar.Backend.Api.ApiService.ApiService
 import com.example.hikmatlar.Backend.Api.ApiService.Quotes
-import com.example.hikmatlar.QuoteRv.QuoteAdapter
+import com.example.hikmatlar.ui.QuoteRv.QuoteAdapter
+import com.example.hikmatlar.R
 import com.example.hikmatlar.databinding.FragmentQuoteBinding
 import retrofit2.Call
 import retrofit2.Response
@@ -58,12 +57,11 @@ class QuoteFragment : Fragment() {
         recreate_res(call)
 
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
-            if (text.isNullOrBlank()){
-                adapter.filter(text.toString())
-                when(adapter.itemCount){
-                    0 -> binding.ifEmpty.visibility = View.VISIBLE
-                    else ->  binding.ifEmpty.visibility = View.GONE
-                }
+            adapter.filter(text.toString())
+            binding.hikmatlar.text = binding.hikmatlar.text.toString().slice(0..8) + " ${rv.adapter?.itemCount}"
+            when(adapter.itemCount){
+                0 -> binding.ifEmpty.visibility = View.VISIBLE
+                else ->  binding.ifEmpty.visibility = View.GONE
             }
         }
     }
@@ -74,7 +72,6 @@ class QuoteFragment : Fragment() {
 
         if (null == activeNetwork) {
             val dialogBuilder = AlertDialog.Builder(requireContext())
-            val intent = Intent(requireContext(), MainActivity::class.java)
             // set message of alert dialog
             dialogBuilder.setMessage("Internetingiz yoquv ekanligiga ishonch hosil qiling")
                 // if the dialog is cancelable
@@ -92,7 +89,6 @@ class QuoteFragment : Fragment() {
 
             // create dialog box
             val alert = dialogBuilder.create()
-            // set title for alert dialog box
             alert.setTitle("Internet yo'q")
             alert.setIcon(R.mipmap.ic_launcher)
             // show alert dialog
@@ -112,7 +108,7 @@ class QuoteFragment : Fragment() {
                     adapter = QuoteAdapter(listData)
                     rv.layoutManager = layoutManager
                     rv.adapter = adapter
-                    // Do something with the data
+                    binding.hikmatlar.text = binding.hikmatlar.text.toString() + " ${rv.adapter?.itemCount}"
                 } else {
                     Toast.makeText(
                         context, "Xatolik yuz berdi.",
@@ -122,9 +118,7 @@ class QuoteFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<Quotes>, t: Throwable) {
-                d("data", t.toString())
                 checkConnectivity(call.clone())
-                // Handle network errors or other failures
             }
         })
     }

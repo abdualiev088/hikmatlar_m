@@ -1,4 +1,4 @@
-package com.example.hikmatlar
+package com.example.hikmatlar.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,9 @@ import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
 import androidx.viewpager2.widget.ViewPager2
-import com.example.hikmatlar.Slider.SliderViewPagerAdapter
+import com.example.hikmatlar.R
+import com.example.hikmatlar.ui.Slider.SliderViewPagerAdapter
+import com.example.hikmatlar.custom.SharedPreferencesHelper
 import com.example.hikmatlar.databinding.ActivityIntroBinding
 
 class IntroActivity : AppCompatActivity() {
@@ -25,6 +27,8 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val sharedPreferencesHelper = SharedPreferencesHelper(this)
 
         supportActionBar?.hide()
 
@@ -50,6 +54,7 @@ class IntroActivity : AppCompatActivity() {
         }
 
         binding.btnStart.setOnClickListener {
+            sharedPreferencesHelper.markFirstLaunch()
             Intent(this, MainActivity::class.java).apply {
                 startActivity(this)
                 finish()

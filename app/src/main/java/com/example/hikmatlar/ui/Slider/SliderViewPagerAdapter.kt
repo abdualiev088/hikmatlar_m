@@ -1,4 +1,4 @@
-package com.example.hikmatlar.Slider
+package com.example.hikmatlar.ui.Slider
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,7 +21,7 @@ class SliderViewPagerAdapter(private var title :List<String>, private var author
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewPagerAdapter.Pager2ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Pager2ViewHolder {
         return Pager2ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_page, parent, false))
     }
 
